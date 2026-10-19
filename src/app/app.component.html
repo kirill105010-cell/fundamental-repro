@@ -1,0 +1,36 @@
+<div style="font-family: sans-serif; padding: 24px; max-width: 860px;">
+
+  <h2>@fundamental-ngx/core — fd-popover MutationObserver CD loop</h2>
+
+  <!-- CD counter -->
+  <div
+       style="padding: 12px; border-radius: 6px; margin-bottom: 24px; font-size: 14px;">
+  </div>
+
+  <!-- controls -->
+  <div style="display: flex; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
+    <button (click)="openPopover()" [disabled]="isOpen">1. Open popover</button>
+    <button (click)="closePopover()" [disabled]="!isOpen">Close popover</button>
+  </div>
+
+  <div style="padding: 16px; border: 2px dashed #e44; border-radius: 6px;">
+    <p style="margin: 0 0 8px; font-size: 11px; color: #e44;">
+      no scrollable ancestor → _findScrollableAncestor returns document.body →
+      MutationObserver watches body subtree → CDK pane IS inside → loop
+    </p>
+
+    <fd-popover [isOpen]="isOpen" (isOpenChange)="isOpen = $event" [noArrow]="true">
+      <fd-popover-control>
+        <button fd-button label="Anchor"></button>
+      </fd-popover-control>
+      <fd-popover-body>
+        <div style="padding: 16px; min-width: 200px;">
+          <strong>Popover open</strong><br>
+          <small style="color: #888;">Bug 1: CD counter should climb rapidly</small><br>
+        </div>
+      </fd-popover-body>
+    </fd-popover>
+
+      <sidebar-splitter (toggle)="toggleRightColumn()" [isOpen]="!isRightColumnHidden"></sidebar-splitter>
+  </div>
+</div>

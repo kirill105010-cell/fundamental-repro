@@ -1,0 +1,102 @@
+$splitter-active: #0854A0;
+$splitter-handle-color: #89919A;
+
+.splitter {
+  height: 100%;
+  width: 16px;
+  z-index: 2;
+
+  .handle {
+    position: absolute;
+
+    &.handle-splitter {
+      width: 13px;
+      height: 22px;
+      top: 50%;
+      margin-top: -12px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: grab;
+
+      .hand-right {
+        margin-left: 5px;
+        width: 7px;
+        height: 13px;
+        margin-top: 5px;
+
+        #arrow {
+          fill: $splitter-active;
+        }
+      }
+
+      .hand-left {
+        margin-left: 5px;
+        width: 7px;
+        height: 13px;
+        margin-top: 5px;
+        transform: rotate(180deg);
+
+        #arrow {
+          fill: $splitter-active;
+        }
+      }
+
+      &:before, &:after {
+        content: '';
+        width: 1px;
+        height: 65px;
+        position: absolute;
+        left: 7px;
+        transition: all 0.1s ease-in;
+      }
+
+      &:before {
+        background-image: linear-gradient(0deg, $splitter-handle-color 0%, rgba(137, 145, 154, 0.00) 100%);
+        bottom: 28px;
+      }
+
+      &:after {
+        background-image: linear-gradient(180deg, $splitter-handle-color 0%, rgba(137, 145, 154, 0.00) 100%);
+        top: 28px;
+      }
+
+      &:hover {
+        background: #EBF5FE;
+        border: 1px solid $splitter-active;
+
+        &:before, &:after {
+          height: 105px;
+        }
+
+        &:before {
+          background-image: linear-gradient(0deg, $splitter-active 0%, rgba(8, 84, 160, 0.00) 100%);
+        }
+
+        &:after {
+          background-image: linear-gradient(180deg, $splitter-active 0%, rgba(8, 84, 160, 0.00) 100%);
+        }
+      }
+
+      &:active {
+        background: $splitter-active;
+        border: 1px solid $splitter-active;
+
+        #arrow {
+          fill: #fff;
+        }
+
+        &:before, &:after {
+          height: 65px;
+        }
+
+        &:before {
+          background-image: linear-gradient(0deg, $splitter-active 0%, rgba(8, 84, 160, 0.00) 100%);
+        }
+
+        &:after {
+          background-image: linear-gradient(180deg, $splitter-active 0%, rgba(8, 84, 160, 0.00) 100%);
+        }
+      }
+    }
+  }
+}
